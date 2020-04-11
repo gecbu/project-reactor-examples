@@ -4,3 +4,7 @@ This repository documents basic usage of Reactor (https://projectreactor.io/) an
 * [Official API](https://projectreactor.io/docs/core/release/api)
 * [Hopping Threads and Schedulers](https://spring.io/blog/2019/12/13/flight-of-the-flux-3-hopping-threads-and-schedulers)
 
+# Upcoming
+* Description of different ways to create and consume streams
+* How to work with Threads
+* Difference between Cold and Hot sequences
