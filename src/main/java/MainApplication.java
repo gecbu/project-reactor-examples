@@ -1,8 +1,10 @@
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.SynchronousSink;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 import java.time.Duration;
+import java.util.function.BiFunction;
 
 public class MainApplication {
 
@@ -65,7 +67,8 @@ public class MainApplication {
                 .subscribeOn(integerThread)
                 .subscribe(
                         element -> System.out.println("Integer Flux: " + element),
-                        error -> {},
+                        error -> {
+                        },
                         () -> integerThread.dispose());
 
         Flux delayedStringFlux = Flux.just("String 1", "String 2", "String 3", "String 4", "String 5")
@@ -76,8 +79,44 @@ public class MainApplication {
                 .subscribeOn(stringThread)
                 .subscribe(
                         element -> System.out.println("String Flux: " + element),
-                        error -> {},
+                        error -> {
+                        },
                         () -> stringThread.dispose());
+
+        /**
+         * Subscribe to a stream which generates sums by applying Gaussian sum formula.
+         *
+         * This examples demonstrates a possible usage of the BiFunction in the generator method. As there is
+         * no calculation limit, the subscriber has to define how many sums should be calculated (i.e. by take(n))
+         * A new Thread is used for the subscription and disposed after the emitting of elements is completed.
+         */
+        Flux additionFlux = Flux.generate(
+                () -> 1,
+                new BiFunction<Integer, SynchronousSink<Integer>, Integer>() {
+                    Integer currentSum = 0;
+
+                    @Override
+                    public Integer apply(Integer value, SynchronousSink<Integer> synchronousSink) {
+                        currentSum += value;
+                        synchronousSink.next(currentSum);
+                        return value + 1;
+                    }
+                })
+                .delayElements(Duration.ofSeconds(1));
+        Scheduler additionThread = Schedulers.newSingle("AdditionThread");
+        System.out.println("Subscribing to Flux generating Gaußsche Summenformel...");
+        additionFlux
+                .take(20)
+                .subscribeOn(additionThread)
+                .subscribe(
+                        element -> System.out.println("Current sum: " + element),
+                        error -> {},
+                        () -> additionThread.dispose());
+
+        // TODO: Inspect Scheduler.single()
+        // Find out, why using Schedulers.single() does not keep an open thread until calculation is done
+        // for the Gaussian Sum Formula
+
     }
 
 }
