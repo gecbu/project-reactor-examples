@@ -1,4 +1,4 @@
-package examples;
+package de.gecbu.projectreactor.examples;
 
 public class ExampleRunner {
 
@@ -20,6 +20,9 @@ public class ExampleRunner {
                 break;
             case "4":
                 example = new Example4();
+                break;
+            case "5":
+                example = new Example5();
                 break;
             default:
                 throw new UnknownExampleException();

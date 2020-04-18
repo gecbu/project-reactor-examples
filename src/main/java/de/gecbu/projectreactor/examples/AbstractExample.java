@@ -1,4 +1,4 @@
-package examples;
+package de.gecbu.projectreactor.examples;
 
 public abstract class AbstractExample {
 

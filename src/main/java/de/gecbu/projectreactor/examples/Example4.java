@@ -1,4 +1,4 @@
-package examples;
+package de.gecbu.projectreactor.examples;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.SynchronousSink;
@@ -20,7 +20,7 @@ public class Example4 extends AbstractExample {
          * A new thread is used for the subscription and disposed after emitting of elements is completed.
          *
          * By using Schedulers.newElastic() a worker pool is used. This enables setting the time, after which the
-         * worker pools automatically get disposed. After the last worker pool is disposed, the main thread can
+         * worker pools automatically get disposed. After the last worker pool is disposed, the main thread
          * will terminate too.
          */
         Flux additionFlux = Flux.generate(
@@ -42,9 +42,9 @@ public class Example4 extends AbstractExample {
                 .publishOn(publishThread)
                 .subscribe(
                         element -> System.out.println(Thread.currentThread().getName() + " Current sum: " + element),
-                        error -> {},
+                        error -> {
+                        },
                         () -> {});
-
-
     }
+
 }

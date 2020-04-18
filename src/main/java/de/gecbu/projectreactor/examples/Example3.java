@@ -1,4 +1,4 @@
-package examples;
+package de.gecbu.projectreactor.examples;
 
 import reactor.core.publisher.Flux;
 
