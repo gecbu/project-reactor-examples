@@ -24,6 +24,9 @@ public class ExampleRunner {
             case "5":
                 example = new Example5();
                 break;
+            case SimpleFluxGeneratingExample.GENERATE_SIMPLE_FLUX:
+                example = new SimpleFluxGeneratingExample();
+                break;
             default:
                 throw new UnknownExampleException();
 

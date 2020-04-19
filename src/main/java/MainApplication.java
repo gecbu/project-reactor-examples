@@ -1,4 +1,5 @@
 import de.gecbu.projectreactor.examples.ExampleRunner;
+import de.gecbu.projectreactor.examples.SimpleFluxGeneratingExample;
 
 public class MainApplication {
 
@@ -8,7 +9,7 @@ public class MainApplication {
          * ExampleRunner. Change the number to execute any other example.
          */
         try {
-            ExampleRunner.run("5");
+            ExampleRunner.run(SimpleFluxGeneratingExample.GENERATE_SIMPLE_FLUX);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
