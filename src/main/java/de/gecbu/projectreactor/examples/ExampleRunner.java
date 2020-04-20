@@ -27,9 +27,11 @@ public class ExampleRunner {
             case SimpleFluxGeneratingExample.GENERATE_SIMPLE_FLUX:
                 example = new SimpleFluxGeneratingExample();
                 break;
+            case FunctionalInterfaceCreationShortForm.FUNCT_INTERFACE_CREATION_SHORT_FORM:
+                example = new FunctionalInterfaceCreationShortForm();
+                break;
             default:
                 throw new UnknownExampleException();
-
         }
         example.run();
     }
