@@ -18,9 +18,6 @@ public class ExampleRunner {
             case "3":
                 example = new Example3();
                 break;
-            case "4":
-                example = new Example4();
-                break;
             case "5":
                 example = new Example5();
                 break;
@@ -29,6 +26,9 @@ public class ExampleRunner {
                 break;
             case FunctionalInterfaceCreationShortForm.FUNCT_INTERFACE_CREATION_SHORT_FORM:
                 example = new FunctionalInterfaceCreationShortForm();
+                break;
+            case GeneratorWithBiFunction.GENERATOR_WITH_BIFUNCTION:
+                example = new GeneratorWithBiFunction();
                 break;
             default:
                 throw new UnknownExampleException();

@@ -18,7 +18,9 @@ import java.util.function.BiFunction;
  * By using Schedulers.newElastic() a worker pool is used. This enables setting the time, after which the worker pools
  * automatically get disposed. After the last worker pool is disposed, the main thread will terminate too.
  */
-public class Example4 extends AbstractExample {
+public class GeneratorWithBiFunction extends AbstractExample {
+
+    public static final String GENERATOR_WITH_BIFUNCTION = "GENERATOR_WITH_BI_FUNCTION";
 
     @Override
     protected void run() {

@@ -34,9 +34,12 @@ Exmaple "GENERATE_SIMPLE_FLUX" shows this approach for generating a stream.
 
 How to use a short form of consumer creation (lambda) is shown in example "FUNCT_INTERFACE_CREATION_SHORT_FORM". It uses a Mono and not a Flux but the handling would be the same.
 
+A more advanced way to create a stream is via a BiFunction as a generator function:
 
-A more advanced way is to use a BiFunction.
-tbd.
+`generate(Callable<S>, BiFunction<S, SynchronousSink<T>, S>) `
+
+With this approach it is possible to use a state S in the generator function. Depending on this state, the processing and emitting of stream elements may vary and finally the state can be returned and used on the next request of the subscriber. As with the simple consumer it is the responsibility of the developer to finish the stream of elements by providing a `sink.complete()` or subscribing for just a specific amount of items.
+The Example GENERATOR_WITH_BI_FUNCTION shows the usage of this approach.
 
 # Upcoming
 * Description of different ways to create and consume streams
