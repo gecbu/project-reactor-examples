@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  */
 public class SimpleFluxGeneratingExample extends AbstractExample {
 
-    public static final String GENERATE_SIMPLE_FLUX = "GENERATE_SIMPLE_FLUX";
+    public static final String NAME = "GENERATE_SIMPLE_FLUX";
 
     @Override
     protected void run() {

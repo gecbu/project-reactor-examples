@@ -2,10 +2,13 @@ package de.gecbu.projectreactor.examples;
 
 import reactor.core.publisher.Flux;
 
-public class Example3 extends AbstractExample {
+public class GeneratorWithSimpleBiFunctionLambda extends AbstractExample {
+
+    public static final String NAME = "GENERATOR_WITH_SIMPLE_BIFUNCTION_LAMBDA";
 
     @Override
     protected void run() {
+
         /**
          * Create a new stream with a generator and subscribe to the emitted items.
          */

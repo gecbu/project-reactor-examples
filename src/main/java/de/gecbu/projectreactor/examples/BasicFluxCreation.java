@@ -2,7 +2,9 @@ package de.gecbu.projectreactor.examples;
 
 import reactor.core.publisher.Flux;
 
-public class Example1 extends AbstractExample {
+public class BasicFluxCreation extends AbstractExample {
+
+    public static final String NAME = "BASIC_FLUX_CREATION";
 
     @Override
     protected void run() {

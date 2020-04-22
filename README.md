@@ -22,7 +22,10 @@ The Flux-API provides a lot of different ways to create/generate a stream. The s
 * Flux.just(items ...)
 * Flux.range(int start, int count)
 
-The coding examples 1, 2, 3 and 5 use one of these basic approaches. 
+The following examples use this approach:
+* BASIC_FLUX_CREATION
+* DIFFERENT_SINGLE_THREAD
+* SIMPLE_THREADING
 
 ## Using a generator
 
@@ -30,7 +33,7 @@ Another way of creating a Flux stream is by implementing a generator function an
 
 The simplest form of a generator is a Consumer which expects a SynchronousSink<T> as a paremeter for its accept method. The accept methods gets invoked every time the subscriber requests the next element of the sequence. It is important to know that the default subscribe methods request an unbounded demand. So you have to make sure that you control the completion in your accept method by using sink.complete() or do this with a custom subscriber which handles the amount of elements to react to.
 
-Exmaple "GENERATE_SIMPLE_FLUX" shows this approach for generating a stream.
+Exmaple GENERATE_SIMPLE_FLUX shows this approach for generating a stream.
 
 How to use a short form of consumer creation (lambda) is shown in example "FUNCT_INTERFACE_CREATION_SHORT_FORM". It uses a Mono and not a Flux but the handling would be the same.
 
@@ -42,6 +45,6 @@ With this approach it is possible to use a state S in the generator function. De
 The Example GENERATOR_WITH_BI_FUNCTION shows the usage of this approach.
 
 # Upcoming
-* Description of different ways to create and consume streams
+* Description of different ways to consume streams
 * How to work with Threads
 * Difference between Cold and Hot sequences

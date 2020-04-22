@@ -6,7 +6,9 @@ import reactor.core.scheduler.Schedulers;
 
 import java.time.Duration;
 
-public class Example2 extends AbstractExample {
+public class SimpleThreading extends AbstractExample {
+
+    public static final String NAME = "SIMPLE_THREADING";
 
     @Override
     protected void run() {

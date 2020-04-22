@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  */
 public class FunctionalInterfaceCreationShortForm extends AbstractExample {
 
-    public static final String FUNCT_INTERFACE_CREATION_SHORT_FORM = "FUNCT_INTERFACE_CREATION_SHORT_FORM";
+    public static final String NAME = "FUNCT_INTERFACE_CREATION_SHORT_FORM";
 
     @Override
     protected void run() {

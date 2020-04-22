@@ -9,7 +9,7 @@ public class MainApplication {
          * ExampleRunner. Change the number to execute any other example.
          */
         try {
-            ExampleRunner.run(FunctionalInterfaceCreationShortForm.FUNCT_INTERFACE_CREATION_SHORT_FORM);
+            ExampleRunner.run(FunctionalInterfaceCreationShortForm.NAME);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

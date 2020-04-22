@@ -9,25 +9,25 @@ public class ExampleRunner {
     public static void run(String exampleNumber) {
         AbstractExample example = null;
         switch (exampleNumber) {
-            case "1":
-                example = new Example1();
+            case BasicFluxCreation.NAME:
+                example = new BasicFluxCreation();
                 break;
-            case "2":
-                example = new Example2();
+            case SimpleThreading.NAME:
+                example = new SimpleThreading();
                 break;
-            case "3":
-                example = new Example3();
+            case GeneratorWithSimpleBiFunctionLambda.NAME:
+                example = new GeneratorWithSimpleBiFunctionLambda();
                 break;
-            case "5":
-                example = new Example5();
+            case DifferentSingleThread.NAME:
+                example = new DifferentSingleThread();
                 break;
-            case SimpleFluxGeneratingExample.GENERATE_SIMPLE_FLUX:
+            case SimpleFluxGeneratingExample.NAME:
                 example = new SimpleFluxGeneratingExample();
                 break;
-            case FunctionalInterfaceCreationShortForm.FUNCT_INTERFACE_CREATION_SHORT_FORM:
+            case FunctionalInterfaceCreationShortForm.NAME:
                 example = new FunctionalInterfaceCreationShortForm();
                 break;
-            case GeneratorWithBiFunction.GENERATOR_WITH_BIFUNCTION:
+            case GeneratorWithBiFunction.NAME:
                 example = new GeneratorWithBiFunction();
                 break;
             default:

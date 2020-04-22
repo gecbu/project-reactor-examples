@@ -20,7 +20,7 @@ import java.util.function.BiFunction;
  */
 public class GeneratorWithBiFunction extends AbstractExample {
 
-    public static final String GENERATOR_WITH_BIFUNCTION = "GENERATOR_WITH_BI_FUNCTION";
+    public static final String NAME = "GENERATOR_WITH_BI_FUNCTION";
 
     @Override
     protected void run() {

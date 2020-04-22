@@ -38,7 +38,9 @@ import java.util.function.Consumer;
  * to the console. But because {@link Flux#blockLast()} returns just the last item, {@link Flux#doOnNext(Consumer)}
  * is used for printing.
  */
-public class Example5 extends AbstractExample {
+public class DifferentSingleThread extends AbstractExample {
+
+    public static final String NAME = "DIFFERENT_SINGLE_THREAD";
 
     @Override
     protected void run() {
