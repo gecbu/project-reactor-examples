@@ -44,7 +44,15 @@ A more advanced way to create a stream is via a BiFunction as a generator functi
 With this approach it is possible to use a state S in the generator function. Depending on this state, the processing and emitting of stream elements may vary and finally the state can be returned and used on the next request of the subscriber. As with the simple consumer it is the responsibility of the developer to finish the stream of elements by providing a `sink.complete()` or subscribing for just a specific amount of items.
 The Example GENERATOR_WITH_BI_FUNCTION shows the usage of this approach.
 
+# Threading
+
+Basic information can be found at [Reference Guide - Threading and Schedulers](https://projectreactor.io/docs/core/release/reference/#schedulers). 
+
+A `Scheduler` is a helper to abstract from the direct handling with Threads and has "scheduling responsibilities similar to an ExecutorService" (see Reference Guide).
+
+When it comes to `Schedulers.single()` and `Schedulers.newSingle()` there is an important thing worth mentioning. One has to be aware that the `Schedulers.single()` will make the execution run in a daemon thread, while `Schedulers.newSinlge()` will make it run in a user (non-daemon) thread. Daemon threads are instantly closed when all other user threads are terminated. A more detailed explanation is given through the following example: DIFFERENT_SINGLE_THREAD
+
+
 # Upcoming
-* Description of different ways to consume streams
 * How to work with Threads
 * Difference between Cold and Hot sequences
