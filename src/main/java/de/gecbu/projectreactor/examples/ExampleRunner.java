@@ -30,6 +30,12 @@ public class ExampleRunner {
             case GeneratorWithBiFunction.NAME:
                 example = new GeneratorWithBiFunction();
                 break;
+            case EmitterProcessorWithPublisher.NAME:
+                example = new EmitterProcessorWithPublisher();
+                break;
+            case EmitterProcessorSinkExample.NAME:
+                example = new EmitterProcessorSinkExample();
+                break;
             default:
                 throw new UnknownExampleException();
         }

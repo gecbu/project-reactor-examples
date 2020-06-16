@@ -1,5 +1,6 @@
+import de.gecbu.projectreactor.examples.EmitterProcessorComplexExample;
+import de.gecbu.projectreactor.examples.EmitterProcessorSinkExample;
 import de.gecbu.projectreactor.examples.ExampleRunner;
-import de.gecbu.projectreactor.examples.FunctionalInterfaceCreationShortForm;
 
 public class MainApplication {
 
@@ -9,7 +10,7 @@ public class MainApplication {
          * ExampleRunner. Change the number to execute any other example.
          */
         try {
-            ExampleRunner.run(FunctionalInterfaceCreationShortForm.NAME);
+            ExampleRunner.run(EmitterProcessorSinkExample.NAME);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
