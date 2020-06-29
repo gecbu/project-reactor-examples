@@ -33,7 +33,7 @@ Another way of creating a Flux stream is by implementing a generator function an
 
 The simplest form of a generator is a Consumer which expects a SynchronousSink<T> as a paremeter for its accept method. The accept methods gets invoked every time the subscriber requests the next element of the sequence. It is important to know that the default subscribe methods request an unbounded demand. So you have to make sure that you control the completion in your accept method by using sink.complete() or do this with a custom subscriber which handles the amount of elements to react to.
 
-Exmaple GENERATE_SIMPLE_FLUX shows this approach for generating a stream.
+Exmaple **GENERATE_SIMPLE_FLUX** shows this approach for generating a stream.
 
 How to use a short form of consumer creation (lambda) is shown in example "FUNCT_INTERFACE_CREATION_SHORT_FORM". It uses a Mono and not a Flux but the handling would be the same.
 
@@ -50,13 +50,33 @@ Processors can be used as Publisher and Subscriber at the same time. If there is
 
 Remember:
 * when a sink based on a processor is already created, the processor can not subscribe to another publisher anymore. Either a sink OR a publisher has to be used to emit items to the processor
-* From the documentation [EmitterProcessor - Guide](https://projectreactor.io/docs/core/release/reference/#_emitter_processor): Initially, when it has no subscriber, it can still accept a few data pushes up to a configurable bufferSize. After that point, if no Subscriber has come in and consumed the data, calls to onNext block until the processor is drained (which can happen only concurrently by then).
+* From the documentation [EmitterProcessor - Guide](https://projectreactor.io/docs/core/release/reference/#_emitter_processor): 
+> Initially, when it has no subscriber, it can still accept a few data pushes up to a configurable bufferSize. After that point, if no Subscriber has come in and consumed the data, calls to onNext block until the processor is drained (which can happen only concurrently by then)."
+* The buffer size can be specified when creating an EmitterProcessor
 
 ## Publishing via sink
-`EmitterProcessorSinkExample` shows how to use a sink to publish/emit items to a EmitterProcessor.
+**EmitterProcessorSinkExample** shows how to use a sink to publish/emit items to a EmitterProcessor. A sink can be created through
+
+```java
+EmitterProcessor<String> processor = EmitterProcessor.create();
+FluxSink<String> sink = processor.sink();
+```
+By using the `next()` method of the sink items can be published to the stream:
+
+```java
+// Publish 100 items
+for (int i = 1; i <= 100; i++) {
+    sink.next(String.valueOf(i));
+}
+```
+
+## Publisher as a source of items
+
+**EmitterProcessorWithPublisher** shows the basics of connecting an EmitterProcessor to a publisher which emits items. The EmitterProcessor only forwards the items so there is nothing special in this basic example. A more complex example would include more than one subscriber and maybe even more than one publisher. 
+
 
 t.b.d: 
-* describe how to subscribe with a processor to an upstream publisher
+* show example of multiple subscribers and/or publisher for an EmitterProcessor with a sink and with publishers
 * explain difference between EmitterProcessor and FluxProcessor
 
 # Threading

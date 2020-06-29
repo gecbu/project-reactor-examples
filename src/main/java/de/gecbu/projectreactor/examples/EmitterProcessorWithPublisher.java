@@ -14,11 +14,9 @@ public class EmitterProcessorWithPublisher extends AbstractExample {
     @Override
     protected void run() {
         EmitterProcessor<Integer> customProcessor = EmitterProcessor.create();
-        customProcessor.doOnNext(element -> System.out.println("doOnNext " + element));
-        Flux<Integer> origin = Flux.range(1, 20);
-        origin.publishOn(Schedulers.newSingle("origin"))
+        Flux<Integer> publisher = Flux.range(1, 20);
+        publisher.publishOn(Schedulers.newSingle("origin"))
                 .subscribeWith(customProcessor)
-                .handle((element, synchronousSink) -> synchronousSink.next(element * 10))
-                .subscribe(element -> System.out.println("UARGH " + element));
+                .subscribe(element -> System.out.println("Item " + element));
     }
 }

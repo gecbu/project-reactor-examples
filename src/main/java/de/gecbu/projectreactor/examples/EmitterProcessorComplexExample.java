@@ -136,7 +136,6 @@ public class EmitterProcessorComplexExample extends AbstractExample {
             System.out.println("onSubscribe Thread = " + Thread.currentThread().getName());
             subscription.request(Long.MAX_VALUE);
         }
-
         @Override
         public void onNext(String s) {
             System.out.println(String.format("onNext Thread = %s; next element = %s", Thread.currentThread().getName(), s));

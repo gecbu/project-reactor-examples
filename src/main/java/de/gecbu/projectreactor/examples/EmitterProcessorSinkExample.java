@@ -54,7 +54,7 @@ public class EmitterProcessorSinkExample extends AbstractExample {
             /* Sleep long enough to show that the publishing thread (which is executing the runnable) stops after the buffer is
             filled. The items 257 to 260 will not be published (no console output), because the publishing thread is blocked.
             We are only blocking the main thread here and the publisher could still be publishing the last items 257 to 260
-            thread as it runs on a different thread but due to the full buffer of the emitter processor this does not happen.
+            thread as it runs on a different thread but due to the filled buffer of the emitter processor this does not happen.
              */
             Thread.sleep(2000);
             System.out.println("Awake!!!");
