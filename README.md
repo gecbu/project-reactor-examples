@@ -49,10 +49,9 @@ A general introduction to processors in Reactor can be found at [Reference Guide
 Processors can be used as Publisher and Subscriber at the same time. If there is a need to programmatically publish/emit items to a stream and the basic approaches (like generators) are not sufficient one can consider using a processor. 
 
 Remember:
-* when a sink based on a processor is already created, the processor can not subscribe to another publisher anymore. Either a sink OR a publisher has to be used to emit items to the processor
-* From the documentation [EmitterProcessor - Guide](https://projectreactor.io/docs/core/release/reference/#_emitter_processor): 
+* when a sink based on a processor is already created, the processor can not subscribe to another publisher anymore. Either a sink OR a publisher can be used to emit items to the processor
+* The buffer size can be specified when creating an EmitterProcessor. From the documentation [EmitterProcessor - Guide](https://projectreactor.io/docs/core/release/reference/#_emitter_processor): 
 > Initially, when it has no subscriber, it can still accept a few data pushes up to a configurable bufferSize. After that point, if no Subscriber has come in and consumed the data, calls to onNext block until the processor is drained (which can happen only concurrently by then)."
-* The buffer size can be specified when creating an EmitterProcessor
 
 ## Publishing via sink
 **EmitterProcessorSinkExample** shows how to use a sink to publish/emit items to a EmitterProcessor. A sink can be created through
@@ -74,6 +73,21 @@ for (int i = 1; i <= 100; i++) {
 
 **EmitterProcessorWithPublisher** shows the basics of connecting an EmitterProcessor to a publisher which emits items. The EmitterProcessor only forwards the items so there is nothing special in this basic example. A more complex example would include more than one subscriber and maybe even more than one publisher. 
 
+## Custom Processor
+
+**CustomProcessorExample** shows how to basically generate a custom processor. Because the processor functions as subscriber and publisher at the same time, there are at least four methods to implement:
+* Subscriber side
+  * onSubscribe
+  * onNext
+  * onComplete
+  * onError
+* Publisher side
+  * subscribe
+  
+Take a look at the documentation to find more details: [API FluxProcessor](https://projectreactor.io/docs/core/snapshot/api/reactor/core/publisher/FluxProcessor.html)
+
+## EmitterProcessor as a HUB
+
 
 t.b.d: 
 * show example of multiple subscribers and/or publisher for an EmitterProcessor with a sink and with publishers
@@ -89,6 +103,15 @@ When it comes to `Schedulers.single()` and `Schedulers.newSingle()` there is an 
 # To remember...
 * `delayElements()` publishes items on a new (parallel) thread per default. 
 * In contrast to the `subcribeOn()` it makes a difference at what position `publishOn()` is called in the reactive pipeline.
+* The difference between `subscribe(...)` and  `subscribeWith(...)` is that the latter returns a publisher and the former just subscribes to a publisher
+
+```Java
+// Just print out the numbers form 1 to 100
+Flux.range(1, 100).subscribe(number -> System.out.println(number))
+
+// Create a new publisher which others can subscribe to
+Flux.range(1, 100).subscribeWith(myCustomSubscriber).subscribe((element) -> System.out.println(element));
+``` 
 
 
 # Upcoming

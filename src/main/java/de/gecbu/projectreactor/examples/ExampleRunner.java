@@ -36,6 +36,12 @@ public class ExampleRunner {
             case EmitterProcessorSinkExample.NAME:
                 example = new EmitterProcessorSinkExample();
                 break;
+            case EmitterProcessorHub.NAME:
+                example = new EmitterProcessorHub();
+                break;
+            case CustomProcessorExample.NAME:
+                example = new CustomProcessorExample();
+                break;
             default:
                 throw new UnknownExampleException();
         }
