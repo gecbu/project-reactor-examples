@@ -48,7 +48,7 @@ The Example GENERATOR_WITH_BI_FUNCTION shows the usage of this approach.
 A general introduction to processors in Reactor can be found at [Reference Guide - Processors](https://projectreactor.io/docs/core/release/reference/#processors).
 Processors can be used as Publisher and Subscriber at the same time. If there is a need to programmatically publish/emit items to a stream and the basic approaches (like generators) are not sufficient one can consider using a processor. 
 
-Remember:
+Important to know:
 * when a sink based on a processor is already created, the processor can not subscribe to another publisher anymore. Either a sink OR a publisher can be used to emit items to the processor
 * The buffer size can be specified when creating an EmitterProcessor. From the documentation [EmitterProcessor - Guide](https://projectreactor.io/docs/core/release/reference/#_emitter_processor): 
 > Initially, when it has no subscriber, it can still accept a few data pushes up to a configurable bufferSize. After that point, if no Subscriber has come in and consumed the data, calls to onNext block until the processor is drained (which can happen only concurrently by then)."
@@ -69,9 +69,13 @@ for (int i = 1; i <= 100; i++) {
 }
 ```
 
+See ``EmitterProcessorSinkExample`` for a running example.
+
 ## Publisher as a source of items
 
-**EmitterProcessorWithPublisher** shows the basics of connecting an EmitterProcessor to a publisher which emits items. The EmitterProcessor only forwards the items so there is nothing special in this basic example. A more complex example would include more than one subscriber and maybe even more than one publisher. 
+**EmitterProcessorWithPublisher** shows the basics of connecting an EmitterProcessor to a publisher which emits items. The EmitterProcessor only forwards the items so there is nothing special in this basic example. A more complex example would include more than one subscriber.
+
+See ``EmitterProcessorWithPublisher`` for a running example.
 
 ## Custom Processor
 
@@ -86,12 +90,8 @@ for (int i = 1; i <= 100; i++) {
   
 Take a look at the documentation to find more details: [API FluxProcessor](https://projectreactor.io/docs/core/snapshot/api/reactor/core/publisher/FluxProcessor.html)
 
-## EmitterProcessor as a HUB
-
-
-t.b.d: 
-* show example of multiple subscribers and/or publisher for an EmitterProcessor with a sink and with publishers
-* explain difference between EmitterProcessor and FluxProcessor
+## Multiple Subscribers
+An EmitterProcessor can have multiple subscribers. An example can be found in ``EmitterProcessorMultipleSubscribers``
 
 # Threading
 Basic information can be found at [Reference Guide - Threading and Schedulers](https://projectreactor.io/docs/core/release/reference/#schedulers). 
@@ -99,6 +99,11 @@ Basic information can be found at [Reference Guide - Threading and Schedulers](h
 A `Scheduler` is a helper to abstract from the direct handling with Threads and has "scheduling responsibilities similar to an ExecutorService" (see Reference Guide).
 
 When it comes to `Schedulers.single()` and `Schedulers.newSingle()` there is an important thing worth mentioning. One has to be aware that the `Schedulers.single()` will make the execution run in a daemon thread, while `Schedulers.newSinlge()` will make it run in a user (non-daemon) thread. Daemon threads are instantly closed when all other user threads are terminated. A more detailed explanation is given through the following example: DIFFERENT_SINGLE_THREAD
+
+There are a few things worth noting when working with threads
+* ``onSubscribe`` changes the thread of the whole process chain. Therefore there is no need to add the call multiple times. When nothing else happens to change the threads, the items will also be emitted on the same thread. In other words, ``onSubscribe`` defines the thread which is used for upstream calls and if no other threads are specified afterwards, the emission of items also happens in this thread.
+* Contrary, ``publishOn`` is used to determine the downstream threads. Each call in the process chain can happen in another thread. Therefore the position of the publishOn-call is important. Everything after the call will be done in the specified thread of ``onPublish``. As a consequence, ``onPublish`` can be used several times in the process chain to hop between threads.
+* The act of subscribing (``subscribe()``) will always happen in the thread it is called from. If no other thread is defined, this is the main thread. You can see this behaviour in the console output of the example in ``EmitterProcessorMultipleSubscribers``. All subscribers subscribe on the main thread while the emission of items happens in the thread specified by ``onPublish``.
 
 # To remember...
 * `delayElements()` publishes items on a new (parallel) thread per default. 
@@ -113,7 +118,5 @@ Flux.range(1, 100).subscribe(number -> System.out.println(number))
 Flux.range(1, 100).subscribeWith(myCustomSubscriber).subscribe((element) -> System.out.println(element));
 ``` 
 
-
-# Upcoming
-* How to work with Threads
+# (Maybe) Upcoming
 * Difference between Cold and Hot sequences

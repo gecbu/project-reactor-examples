@@ -8,7 +8,7 @@ public class MainApplication {
          * ExampleRunner. Change the name to execute any other example.
          */
         try {
-            ExampleRunner.run(CustomProcessorExample.NAME);
+            ExampleRunner.run(EmitterProcessorMultipleSubscribers.NAME);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

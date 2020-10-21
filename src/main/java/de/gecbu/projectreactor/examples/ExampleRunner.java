@@ -36,8 +36,8 @@ public class ExampleRunner {
             case EmitterProcessorSinkExample.NAME:
                 example = new EmitterProcessorSinkExample();
                 break;
-            case EmitterProcessorHub.NAME:
-                example = new EmitterProcessorHub();
+            case EmitterProcessorMultipleSubscribers.NAME:
+                example = new EmitterProcessorMultipleSubscribers();
                 break;
             case CustomProcessorExample.NAME:
                 example = new CustomProcessorExample();

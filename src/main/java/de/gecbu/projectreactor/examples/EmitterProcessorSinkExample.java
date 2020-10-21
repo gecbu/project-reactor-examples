@@ -4,9 +4,6 @@ import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.FluxSink;
 import reactor.core.scheduler.Schedulers;
 
-import java.time.Duration;
-import java.util.concurrent.CountDownLatch;
-
 /**
  * This class demonstrates how to basically publish elements to an EmitterProcessor via a sink
  */
@@ -20,7 +17,7 @@ public class EmitterProcessorSinkExample extends AbstractExample {
          * Step 1:
          * Publish items via a sink. It is important to note that the subscription happens before items
          * are published via the sink in the for-loop.
-         * All items a printed to the console
+         * All items are printed to the console
          */
 
         EmitterProcessor<String> processor = EmitterProcessor.create();
